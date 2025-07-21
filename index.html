@@ -1,0 +1,2344 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DigiLib Pro | World-Class Digital Library</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-dark: #0f172a;
+            --primary-light: #f8fafc;
+            --accent-blue: #06b6d4;
+            --accent-purple: #8b5cf6;
+            --accent-gold: #f59e0b;
+            --glass-bg: rgba(255, 255, 255, 0.08);
+            --glass-border: rgba(255, 255, 255, 0.15);
+            --success-color: #10b981;
+            --warning-color: #f59e0b;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, var(--primary-dark) 0%, #1e293b 100%);
+            color: white;
+            overflow-x: hidden;
+            min-height: 100vh;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Ultra Premium Text Effects */
+        .elite-gradient-text {
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple), var(--accent-gold));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            background-size: 400% 400%;
+            animation: eliteGradientFlow 8s ease infinite;
+            text-shadow: 0 0 30px rgba(6, 182, 212, 0.3);
+        }
+
+        @keyframes eliteGradientFlow {
+            0% { background-position: 0% 50%; }
+            25% { background-position: 100% 50%; }
+            50% { background-position: 50% 100%; }
+            75% { background-position: 0% 50%; }
+            100% { background-position: 50% 0%; }
+        }
+
+        /* Floating particles animation */
+        .particles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            background: rgba(6, 182, 212, 0.1);
+            border-radius: 50%;
+            animation: float 20s infinite linear;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* World-Class Card Design */
+        .elite-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            transform: translateY(0);
+            cursor: pointer;
+            position: relative;
+        }
+
+        .elite-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(6, 182, 212, 0.1), rgba(139, 92, 246, 0.1));
+            opacity: 0;
+            transition: opacity 0.6s ease;
+            z-index: 1;
+        }
+
+        .elite-card:hover {
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.3);
+            border-color: rgba(6, 182, 212, 0.5);
+        }
+
+        .elite-card:hover::before {
+            opacity: 1;
+        }
+
+        /* Perfect Book Display */
+        .book-display {
+            position: relative;
+            overflow: hidden;
+            border-radius: 16px;
+            transition: transform 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+
+        .book-display img {
+            transition: transform 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .elite-card:hover .book-display img {
+            transform: scale(1.1);
+        }
+
+        /* Sophisticated Grid System */
+        .elite-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2.5rem;
+        }
+
+        /* Premium Search Experience */
+        .elite-search {
+            background: rgba(15, 23, 42, 0.6);
+            border: 2px solid rgba(6, 182, 212, 0.3);
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            border-radius: 50px !important;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .elite-search:focus-within {
+            background: rgba(15, 23, 42, 0.8);
+            border-color: var(--accent-blue);
+            box-shadow: 0 0 0 4px rgba(6, 182, 212, 0.2), 0 15px 40px rgba(0, 0, 0, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .elite-search input {
+            background: transparent !important;
+            border: none !important;
+            outline: none !important;
+            box-shadow: none !important;
+            color: white !important;
+            font-size: 1.1rem;
+        }
+
+        .elite-search input::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        /* World-Class Buttons */
+        .btn-elite {
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple), var(--accent-gold));
+            border: none;
+            background-size: 300% 300%;
+            animation: eliteGradientFlow 10s ease infinite;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            border-radius: 50px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 10px 30px rgba(6, 182, 212, 0.3);
+        }
+
+        .btn-elite::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .btn-elite:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(6, 182, 212, 0.4);
+            color: white;
+        }
+
+        .btn-elite:hover::before {
+            left: 100%;
+        }
+
+        /* Perfect Modal Design */
+        .elite-modal .modal-content {
+            background: linear-gradient(135deg, rgba(15, 23, 42, 0.98), rgba(30, 41, 59, 0.98));
+            backdrop-filter: blur(40px);
+            border: 2px solid rgba(6, 182, 212, 0.3);
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Progress Bar for Downloads */
+        .download-progress {
+            height: 4px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 2px;
+            overflow: hidden;
+            margin-top: 1rem;
+            display: none;
+        }
+
+        .download-progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent-blue), var(--accent-purple));
+            width: 0%;
+            transition: width 0.3s ease;
+            border-radius: 2px;
+        }
+
+        /* Success notification */
+        .success-notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, var(--success-color), #059669);
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(16, 185, 129, 0.3);
+            transform: translateX(400px);
+            transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            z-index: 9999;
+            backdrop-filter: blur(10px);
+        }
+
+        .success-notification.show {
+            transform: translateX(0);
+        }
+
+        /* Category Filter Pills */
+        .category-pills {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-bottom: 2rem;
+        }
+
+        .category-pill {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .category-pill:hover,
+        .category-pill.active {
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+            border-color: transparent;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(6, 182, 212, 0.3);
+        }
+
+        /* Enhanced Rating Display */
+        .rating-display {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .star {
+            color: var(--accent-gold);
+            font-size: 0.9rem;
+        }
+
+        /* Loading Spinner */
+        .loading-spinner {
+            border: 3px solid rgba(255, 255, 255, 0.1);
+            border-top: 3px solid var(--accent-blue);
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .elite-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+                gap: 2rem;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .elite-grid {
+                grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+                gap: 1.5rem;
+            }
+            
+            .category-pills {
+                gap: 0.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .elite-grid {
+                grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+                gap: 1.2rem;
+            }
+            
+            .hero-title {
+                font-size: 2.5rem !important;
+            }
+            
+            .category-pill {
+                padding: 0.4rem 1rem;
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .elite-grid {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+                gap: 1rem;
+            }
+            
+            .elite-search {
+                padding: 0.75rem 1rem;
+            }
+        }
+
+        /* Perfect Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+            height: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(15, 23, 42, 0.4);
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(var(--accent-blue), var(--accent-purple));
+            border-radius: 5px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(var(--accent-purple), var(--accent-gold));
+        }
+
+        /* Animations */
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .slide-in-up {
+            animation: slideInUp 0.6s ease forwards;
+        }
+
+        /* Statistics Section */
+        .stats-section {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            margin: 2rem 0;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .stat-label {
+            color: rgba(255, 255, 255, 0.8);
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Added for better text readability */
+        .book-description {
+            color: rgba(255, 255, 255, 0.7) !important;
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating Particles Background -->
+    <div class="particles" id="particles"></div>
+
+    <!-- Success Notification -->
+    <div class="success-notification" id="successNotification">
+        <i class="fas fa-check-circle me-2"></i>
+        <span id="notificationMessage">Berhasil!</span>
+    </div>
+
+    <!-- World-Class Hero Section -->
+    <section class="min-vh-100 d-flex align-items-center position-relative overflow-hidden py-5">
+        <div class="container position-relative z-index-2">
+            <div class="row justify-content-center">
+                <div class="col-lg-10 text-center px-3">
+                    <h1 class="display-2 fw-900 mb-4 elite-gradient-text hero-title">DigiLib Pro</h1>
+                    <p class="lead mb-5 fs-3 opacity-90" style="font-weight: 400;">Perpustakaan Digital Kelas Dunia dengan Koleksi Premium</p>
+                    
+                    <!-- Stats Section -->
+                    <div class="stats-section mb-5">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="stat-item">
+                                    <div class="stat-number" id="bookCount">90+</div>
+                                    <div class="stat-label">E-Books</div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="stat-item">
+                                    <div class="stat-number">6+</div>
+                                    <div class="stat-label">Kategori</div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="stat-item">
+                                    <div class="stat-number">1K+</div>
+                                    <div class="stat-label">Pembaca</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="d-flex gap-3 justify-content-center flex-wrap">
+                        <button id="featuredBtn" class="btn btn-elite btn-lg px-5 py-3 shadow">
+                            <i class="fas fa-heart me-2"></i> Buku Favorit
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Premium Background Elements -->
+        <div class="position-absolute top-0 start-0 w-100 h-100 overflow-hidden z-index-1">
+            <div class="position-absolute top-0 start-0 w-100 h-100" style="background: radial-gradient(circle at 20% 30%, rgba(6, 182, 212, 0.15) 0%, transparent 50%);"></div>
+            <div class="position-absolute top-0 start-0 w-100 h-100" style="background: radial-gradient(circle at 80% 70%, rgba(139, 92, 246, 0.15) 0%, transparent 50%);"></div>
+            <div class="position-absolute top-0 start-0 w-100 h-100" style="background: radial-gradient(circle at 50% 50%, rgba(245, 158, 11, 0.1) 0%, transparent 60%);"></div>
+        </div>
+    </section>
+
+    <!-- Elite Books Collection -->
+    <section id="booksSection" class="py-5 position-relative" style="background: linear-gradient(rgba(15, 23, 42, 0.95), rgba(15, 23, 42, 1))">
+        <div class="container position-relative z-index-2">
+            <div class="text-center mb-5 px-3">
+                <h2 class="display-4 fw-bold mb-3 elite-gradient-text">Koleksi Eksklusif</h2>
+                <p class="lead fs-4 opacity-90">Temukan pengetahuan tak terbatas dalam genggaman Anda</p>
+            </div>
+            
+            <!-- Category Filter Pills -->
+            <div class="category-pills px-3" id="categoryPills">
+                <div class="category-pill active" data-category="all">Semua</div>
+                <div class="category-pill" data-category="Teknologi">Teknologi</div>
+                <div class="category-pill" data-category="AI">AI</div>
+                <div class="category-pill" data-category="Desain">Desain</div>
+                <div class="category-pill" data-category="Blockchain">Blockchain</div>
+                <div class="category-pill" data-category="Keamanan">Keamanan</div>
+                <div class="category-pill" data-category="Data">Data Science</div>
+            </div>
+            
+            <div class="d-flex justify-content-center mb-5 px-3">
+                <div class="w-100" style="max-width: 600px;">
+                    <div class="elite-search shadow-sm">
+                        <div class="input-group input-group-lg">
+                            <span class="input-group-text bg-transparent border-0 text-white ps-4">
+                                <i class="fas fa-filter"></i>
+                            </span>
+                            <input type="text" id="filterInput" class="form-control bg-transparent border-0 text-white py-3" 
+                                   placeholder="Filter koleksi berdasarkan judul, penulis, atau kategori...">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="elite-grid mt-5 px-3" id="bookGrid">
+                <!-- Books will be loaded here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- World-Class Book Modal -->
+    <div class="modal fade elite-modal" id="bookModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-xl modal-dialog-centered">
+            <div class="modal-content border-0 overflow-hidden">
+                <div class="modal-body p-0">
+                    <div class="row g-0">
+                        <div class="col-lg-5 p-4 d-flex align-items-center justify-content-center" style="background: rgba(0, 0, 0, 0.3);">
+                            <div class="book-display text-center">
+                                <img id="modalBookCover" src="" class="img-fluid shadow-lg" alt="Book Cover" style="max-height: 500px; border-radius: 15px; object-fit: contain;">
+                            </div>
+                        </div>
+                        <div class="col-lg-7 p-4 p-lg-5">
+                            <button type="button" class="btn-close btn-close-white position-absolute top-0 end-0 m-3" data-bs-dismiss="modal" aria-label="Close"></button>
+                            
+                            <h2 id="modalBookTitle" class="fw-bold mb-3 elite-gradient-text"></h2>
+                            <p id="modalBookAuthor" class="text-muted mb-3 fs-5"></p>
+                            
+                            <div class="d-flex align-items-center mb-4 flex-wrap gap-3">
+                                <div class="rating-display" id="modalBookRating"></div>
+                                <span class="badge bg-dark bg-opacity-50 px-3 py-2" id="modalBookCategory"></span>
+                                <span class="badge bg-success bg-opacity-50 px-3 py-2" id="modalBookLanguage"></span>
+                            </div>
+                            
+                            <p id="modalBookDesc" class="mb-4 fs-6 lh-base book-description"></p>
+                            
+                            <!-- Download Progress -->
+                            <div class="download-progress" id="downloadProgress">
+                                <div class="download-progress-bar" id="downloadProgressBar"></div>
+                            </div>
+                            
+                            <div class="d-flex gap-3 mt-5 flex-wrap">
+                                <button class="btn btn-elite rounded-pill px-4 py-3 flex-grow-1" id="downloadBtn">
+                                    <i class="fas fa-download me-2"></i> Unduh PDF
+                                    <span class="loading-spinner ms-2" style="display: none;" id="downloadSpinner"></span>
+                                </button>
+                                <button class="btn btn-outline-warning rounded-pill px-4 py-3" id="favoriteBtn">
+                                    <i class="fas fa-heart me-2"></i> Favorit
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Premium Book Data - World Class Collection
+const eliteBooks = [
+            {
+                id: 1,
+                title: "Keseimbangan Hidup Kerja Riset Psikologi",
+                author: "Andi Pratama",
+                cover: "https://res.cloudinary.com/dl2egfdw2/image/upload/v1752997151/IMG_9449_hlg523.jpg",
+                desc: "Panduan mengelola keseimbangan hidup, kerja, dan riset dari sudut pandang psikologi.",
+                category: "Pengembangan Diri",
+                rating: 4.6,
+                pages: +50,
+                language: "Indonesia",
+                featured: true,
+                file: "https://drive.google.com/uc?export=download&id=1-ej9t--wCZfKU98ZIroujiXzgf9Muf8o"
+            },
+            {
+                id: 2,
+                title: "Mental Load Mengapa Otak Kita Lelah Tanpa Disadari",
+                author: "Clara Wijaya",
+                cover: "https://res.cloudinary.com/dl2egfdw2/image/upload/v1752997159/IMG_9448_ineuhb.jpg",
+                desc: "Buku ini mengupas tuntas konsep mental load – beban pikiran tak kasatmata yang terus menggerogoti energi mental. Dengan pendekatan psikologis, penulis menjelaskan bagaimana tumpukan tanggung jawab harian, keputusan kecil, dan tekanan sosial bisa menyebabkan kelelahan kronis tanpa kita sadari. Tidak hanya mendiagnosis masalah, buku ini juga menawarkan strategi praktis untuk mengurai beban mental dan menciptakan pola pikir yang lebih sehat.",
+                category: "Psikologi",
+                rating: 4.8,
+                pages: +50,
+                language: "Indonesia",
+                featured: true,
+                file: "https://drive.google.com/uc?export=download&id=10OII2T2T_ObN7f6K3cDlh-dezgdXZW0x"
+            },
+            {
+                id: 3,
+                title: "Toxic Productivity_ Ketika Produktif Justru Membuat Kita Hancur Pelan-Pelan",
+                author: "Rendra Pratama",
+                cover: "https://res.cloudinary.com/dl2egfdw2/image/upload/v1752997182/IMG_9479_qsc6e6.jpg",
+                desc: "Buku ini membongkar mitos budaya produktivitas berlebihan yang justru merusak kesehatan mental dan fisik. Dengan analisis mendalam, penulis menunjukkan bagaimana obsesi terhadap efisiensi dan pencapaian bisa berubah menjadi racun yang menggerogoti kebahagiaan dan hubungan sosial. Tidak hanya mengkritik fenomena ini, buku juga memberikan solusi untuk menemukan keseimbangan antara bekerja dan hidup.",
+                category: "Pengembangan Diri",
+                rating: 4.5,
+                pages: +50,
+                language: "Indonesia",
+                featured: false,
+                file: "https://drive.google.com/uc?export=download&id=10ZPTVw8eatQ2K54W2jCOmvXfM7UmQEyj"
+            },
+            {
+                id: 4,
+                title: "Sejarah Rakyat Eropa Modern",
+                author: "Ahmad santoso",
+                cover: "https://res.cloudinary.com/dl2egfdw2/image/upload/v1752985788/IMG_9407_h8els7.jpg",
+                desc: "Buku ini mengupas transformasi masyarakat Eropa dari masa pra-industri hingga era kontemporer melalui sudut pandang rakyat biasa. Dengan pendekatan sejarah sosial, penulis mengungkap bagaimana revolusi industri, perang dunia, dan perubahan politik membentuk kehidupan sehari-hari, budaya kerja, serta dinamika kelas masyarakat yang sering terabaikan dalam narasi sejarah konvensional.",
+                category: "Sejarah",
+                rating: 4.7,
+                pages: +50,
+                language: "Indonesia",
+                featured: false,
+                file: "https://drive.google.com/uc?export=download&id=11H5H_sm7j8bvbD7M5375IDA5ORNt1Fzb"
+            },
+            {
+                id: 5,
+                title: "Intermittent Fasting_ Ilmu di Balik Tren Diet Populer",
+                author: "Don Norman",
+                cover: "https://res.cloudinary.com/dl2egfdw2/image/upload/v1752997129/IMG_9436_ae2shx.jpg",
+                desc: "Prinsip-prinsip desain antarmuka pengguna dan pengalaman pengguna untuk aplikasi modern.",
+                category: "Desain",
+                rating: 4.9,
+                pages: +50,
+                language: "Indonesia",
+                featured: true,
+                file: "https://drive.google.com/uc?export=download&id=11zG3t61mDD3NeMaS8qKiI7QGCrllEjOm"
+            },
+            {
+                id: 6,
+                title: "Retorika Digital & Akses Setara",
+                author: "Don Tapscott",
+                cover: "https://res.cloudinary.com/dl2egfdw2/image/upload/v1752997109/IMG_9426_l2urfc.jpg",
+                desc: "Mengungkap potensi revolusioner teknologi blockchain dalam transformasi industri.",
+                category: "Blockchain",
+                rating: 4.8,
+                pages: +50,
+                language: "Indonesia",
+                featured: false,
+                file: "https://drive.google.com/uc?export=download&id=12AFxtLNZDCbpD-3t8gvsw4vPQIACoa8X"
+            },
+            {
+                id: 7,
+                title: "Multitasking di Era Digital_ Efisiensi atau Sumber Stres",
+                author: "Bruce Schneier",
+                cover: "https://res.cloudinary.com/dl2egfdw2/image/upload/v1752997139/IMG_9440_nmew3b.jpg",
+                desc: "Dasar-dasar keamanan siber untuk melindungi sistem dan data digital Anda.",
+                category: "Keamanan",
+                rating: 4.7,
+                pages: +50,
+                language: "Indonesia",
+                featured: false,
+                file: "https://drive.google.com/uc?export=download&id=12S8GirfmblxbEii3B9VYqILJbRNS5gP7"
+            },
+            {
+                id: 8,
+                title: "Perfeksionisme_ Ketika Standar Tinggi Menjadi Beban Psikologis ",
+                author: "Hadley Wickham",
+                cover: "https://res.cloudinary.com/dl2egfdw2/image/upload/v1752997146/IMG_9444_bjbgft.jpg",
+                desc: "Panduan lengkap untuk memulai karir di bidang data science dengan contoh praktis.",
+                category: "Data",
+                rating: 4.6,
+                pages: +50,
+                language: "Indonesia",
+                featured: true,
+                file: "https://drive.google.com/uc?export=download&id=12UkIdkr8AZzS6XAp2G5EIOaH5W-i4H6B"
+            },
+            {
+                id: 9,
+                title: "Komunikasi Efektif dalam Keluarga_ Teknik Berdasarkan Psikologi Relasi ",
+                author: "Addy Osmani",
+                cover: "https://res.cloudinary.com/dl2egfdw2/image/upload/v1752997159/IMG_9458_qxqrss.jpg",
+                desc: "Teknik dan praktik terbaik dalam pengembangan web modern dengan JavaScript.",
+                category: "Teknologi",
+                rating: 4.5,
+                pages: +50,
+                language: "Indonesia",
+                featured: false,
+                file: "https://drive.google.com/uc?export=download&id=12VmeyGuPTLR7FTbfmlGZOOUYlwPUd4CO"
+            },
+            {
+                id: 10,
+                title: "Tren Self Healing_ Mana yang Mitos, Mana yang Ilmiah ",
+                author: "Ian Goodfellow",
+                cover: "https://res.cloudinary.com/dl2egfdw2/image/upload/v1752997169/IMG_9457_zrje73.jpg",
+                desc: "Konsep lanjutan dan implementasi praktis deep learning untuk profesional.",
+                category: "AI",
+                rating: 4.9,
+                pages: +50,
+                language: "Indonesia",
+                featured: true,
+                file: "https://drive.google.com/uc?export=download&id=12bmnZu_zqh7TSM9LMWpYfcXqWRQ5duTO"
+            },
+            {
+                id: 11,
+                title: "Quarter Life Crisis_ Kenapa di Umur 20-30 Rasanya Semua Berantakan ",
+                author: "Andrew S. Tanenbaum",
+                cover: "https://res.cloudinary.com/dl2egfdw2/image/upload/v1752997175/IMG_9475_wncadw.jpg",
+                desc: "Konsep dan implementasi sistem operasi modern untuk mahasiswa dan profesional.",
+                category: "Teknologi",
+                rating: 4.7,
+                pages: +50,
+                language: "Indonesia",
+                featured: false,
+                file: "https://drive.google.com/uc?export=download&id=12eiPfXWoMzrhOun7Rir9MLJQJLmFSlNR"
+            },
+            {
+                id: 12,
+                title: "Blue Carbon_ Apa Itu dan Kenapa Hutan Mangrove Itu Penting",
+                author: "",
+                cover: "https://res.cloudinary.com/dl2egfdw2/image/upload/v1752997173/IMG_9470_a5rnxl.jpg",
+                desc: "Prinsip dasar dan implementasi jaringan komputer untuk berbagai skala.",
+                category: "Teknologi",
+                rating: 4.6,
+                pages: +50,
+                language: "Indonesia",
+                featured: false,
+                file: "https://drive.google.com/uc?export=download&id=13kU7p6z6WO9ssWUOuYOVTw6pIhYYSliF"
+            },
+            {
+                id: 13,
+                title: "Stop Banding-Bandingin Diri Sendiri_ Cara Sehat Mengelola Social Comparison ",
+                author: "Mahmud Hidayat",
+                cover: "https://res.cloudinary.com/dl2egfdw2/image/upload/v1752997161/IMG_9462_djurzo.jpg",
+                desc: "Prinsip dasar dan implementasi jaringan komputer untuk berbagai skala.",
+                category: "Teknologi",
+                rating: 4.6,
+                pages: +50,
+                language: "Indonesia",
+                featured: false,
+                file: "https://drive.google.com/uc?export=download&id=13vMoJNnjem4t4tgDhWp1FxICqDFLuGiL"
+            },
+            {
+                id: 14,
+                title: "Kenapa Bau Hujan Bikin Kita Nostalgia_ Mengungkap Misteri Petrichor dan Kekuatan Ingatan ",
+                author: "johnson Peterson",
+                cover: "https://res.cloudinary.com/dl2egfdw2/image/upload/v1752997188/IMG_9489_k6ixii.jpg",
+                desc: "Prinsip dasar dan implementasi jaringan komputer untuk berbagai skala.",
+                category: "Teknologi",
+                rating: 4.6,
+                pages: +50,
+                language: "Indonesia",
+                featured: false,
+                file: "https://drive.google.com/uc?export=download&id=13y6rBWRA1yiTxyiUgBxXsyoFc9f-MC_X"
+            },
+            {
+                id: 15,
+                title: "Kenapa Kita Sering Merasa Gagal Padahal Nggak_ Jawaban dari Psikologi Self-Compassion",
+                author: "",
+                cover: "https://res.cloudinary.com/dl2egfdw2/image/upload/v1752997170/IMG_9463_chw45c.jpg",
+                desc: "Prinsip dasar dan implementasi jaringan komputer untuk berbagai skala.",
+                category: "Teknologi",
+                rating: 4.6,
+                pages: +50,
+                language: "Indonesia",
+                featured: false,
+                file: "https://drive.google.com/uc?export=download&id=14QIKGbC0yNb0hUIb9U9EuvY7m4wDja2_"
+            },
+            {
+                id: 16,
+                title: "Model Pengkodean untuk Literatur Ilmiah ",
+                author: "jona rent",
+                cover: "https://res.cloudinary.com/dl2egfdw2/image/upload/v1752997137/IMG_9419_tnbr4g.jpg",
+                desc: "Prinsip dasar dan implementasi jaringan komputer untuk berbagai skala.",
+                category: "Teknologi",
+                rating: 4.6,
+                pages: +50,
+                language: "Indonesia",
+                featured: false,
+                file: "https://drive.google.com/uc?export=download&id=14aUhG2D35wxTB389rG8qu3oZU8x2ItL3"
+            },
+            {
+                id: 17,
+                title: "Kenapa Aku Merasa Kosong_ Jawaban Psikologi tentang Mati Rasa Emosional ",
+                author: "fabio garcia",
+                cover: "https://res.cloudinary.com/dl2egfdw2/image/upload/v1752997174/IMG_9472_pnx4vj.jpg",
+                desc: "Prinsip dasar dan implementasi jaringan komputer untuk berbagai skala.",
+                category: "Teknologi",
+                rating: 4.6,
+                pages: +50,
+                language: "Indonesia",
+                featured: false,
+                file: "https://drive.google.com/uc?export=download&id=15GSb-51paL86Ok1_iwI-GZ4hfEjCAtoF"
+            },
+            {
+                id: 18,
+                title: "Apa Jadinya Kalau Semua Orang di Dunia Tidur Bersamaan_ Sebuah Eksplorasi Hipotetis Dampak Global - ",
+                author: "",
+                cover: "https://res.cloudinary.com/dl2egfdw2/image/upload/v1752997206/IMG_9496_hxoida.jpg",
+                desc: "Prinsip dasar dan implementasi jaringan komputer untuk berbagai skala.",
+                category: "Teknologi",
+                rating: 4.6,
+                pages: +50,
+                language: "Indonesia",
+                featured: false,
+                file: "https://drive.google.com/uc?export=download&id=1679Z705QlXYfOnq3XILX1RNDcWVyR6Ic"
+            },
+            {
+                id: 19,
+                title: "100 Fakta Gak Berguna Tapi Menyenangkan_ Edisi Spesial untuk Pikiran Penasaranmu! ",
+                author: "",
+                cover: "https://res.cloudinary.com/dl2egfdw2/image/upload/v1752997205/IMG_9495_rzbavx.jpg",
+                desc: "Prinsip dasar dan implementasi jaringan komputer untuk berbagai skala.",
+                category: "Teknologi",
+                rating: 4.6,
+                pages: +50,
+                language: "Indonesia",
+                featured: false,
+                file: "https://drive.google.com/uc?export=download&id=16ZwHMc2tMo4iAGIiS6Bf87M5EPpRSXhM"
+            },
+            {
+                id: 20,
+                title: "Panduan Literasi Digital Pendidikan Berkelanjutan ",
+                author: "",
+                cover: "https://res.cloudinary.com/dl2egfdw2/image/upload/v1752997125/IMG_9415_m04aut.jpg",
+                desc: "Prinsip dasar dan implementasi jaringan komputer untuk berbagai skala.",
+                category: "Teknologi",
+                rating: 4.6,
+                pages: +50,
+                language: "Indonesia",
+                featured: false,
+                file: "https://drive.google.com/uc?export=download&id=170X5_zS397vuTZ4iAZNTsiZeo81ZH7I3"
+            },
+            {
+                id: 21,
+                title: "Kenapa Belajar Online Bisa Bikin Bosan Jawaban dari Jurnal Pendidikan Digital ",
+                author: "",
+                cover: "https://res.cloudinary.com/dl2egfdw2/image/upload/v1752997123/IMG_9433_dbbbtl.jpg",
+                desc: "Prinsip dasar dan implementasi jaringan komputer untuk berbagai skala.",
+                category: "Teknologi",
+                rating: 4.6,
+                pages: +50,
+                language: "Indonesia",
+                featured: false,
+                file: "https://drive.google.com/uc?export=download&id=176KevQdkoKIhTUZ5NEQ0ZMzJpNJVIevb"
+            },
+            {
+                id: 22,
+                title: "Budaya Mager Gaya Hidup ",
+                author: "",
+                cover: "https://res.cloudinary.com/dl2egfdw2/image/upload/v1752997165/IMG_9466_rs7rfg.jpg",
+                desc: "Prinsip dasar dan implementasi jaringan komputer untuk berbagai skala.",
+                category: "Teknologi",
+                rating: 4.6,
+                pages: +50,
+                language: "Indonesia",
+                featured: false,
+                file: "https://drive.google.com/uc?export=download&id=1A1D6y96r_nA7e0bOjgHsbgfkiUWxCeAt"
+            },
+            {
+                id: 23,
+                title: "AI dalam Kehidupan Sehari-hari_ Prediksi Masa Depan Menurut Riset Teknologi ",
+                author: "",
+                cover: "https://res.cloudinary.com/dl2egfdw2/image/upload/v1752997149/IMG_9441_pukh1s.jpg",
+                desc: "Prinsip dasar dan implementasi jaringan komputer untuk berbagai skala.",
+                category: "Teknologi",
+                rating: 4.6,
+                pages: +50,
+                language: "Indonesia",
+                featured: false,
+                file: "https://drive.google.com/uc?export=download&id=1Bvqk-aJC9jjnhZ3k_2PDg_JgwVUzNpL4"
+            },
+            {
+                id: 24,
+                title: "Mengatasi Inner Child Trauma_ Langkah-Langkah Ilmiah Menuju Penyembuhan ",
+                author: "",
+                cover: "https://res.cloudinary.com/dl2egfdw2/image/upload/v1752997157/IMG_9456_kqsxtz.jpg",
+                desc: "Prinsip dasar dan implementasi jaringan komputer untuk berbagai skala.",
+                category: "Teknologi",
+                rating: 4.6,
+                pages: +50,
+                language: "Indonesia",
+                featured: false,
+                file: "https://drive.google.com/uc?export=download&id=1CJAWJze-NKC8uUervXLSHmmeyufvRiMG"
+            },
+            {
+                id: 25,
+                title: "Memori, Kognisi, & Psikologi Membaca_ Menguak Rahasia Otak dalam Memahami Teks ",
+                author: "",
+                cover: "https://res.cloudinary.com/dl2egfdw2/image/upload/v1752997134/IMG_9417_eo0cdr.jpg",
+                desc: "Prinsip dasar dan implementasi jaringan komputer untuk berbagai skala.",
+                category: "Teknologi",
+                rating: 4.6,
+                pages: +50,
+                language: "Indonesia",
+                featured: false,
+                file: "https://drive.google.com/uc?export=download&id=1CkmMUFuA2z4YSIeL5zq6XW0xLdp4iOu7"
+            },
+            {
+                id: 26,
+                title: "The Uncanny in Film & Psychology ",
+                author: "",
+                cover: "https://res.cloudinary.com/dl2egfdw2/image/upload/v1752997146/IMG_9420_rliimm.jpg",
+                desc: "Prinsip dasar dan implementasi jaringan komputer untuk berbagai skala.",
+                category: "Teknologi",
+                rating: 4.6,
+                pages: +50,
+                language: "Indonesia",
+                featured: false,
+                file: "https://drive.google.com/uc?export=download&id=1CpkWle4PHDqFtJHCTdKiCl8oHsKb3ymF"
+            },
+            {
+                id: 27,
+                title: "Behavioral Economics_ Mengapa Kita Gagal Mengatur Keuangan Sendiri ",
+                author: "",
+                cover: "https://res.cloudinary.com/dl2egfdw2/image/upload/v1752997157/IMG_9455_swqzda.jpg",
+                desc: "Prinsip dasar dan implementasi jaringan komputer untuk berbagai skala.",
+                category: "Teknologi",
+                rating: 4.6,
+                pages: +50,
+                language: "Indonesia",
+                featured: false,
+                file: "https://drive.google.com/uc?export=download&id=1F7MgBxlvMKF2hPVEejCi9f-qhQs8TkX3"
+            },
+            {
+                id: 28,
+                title: "Mengapa Aku Takut Dicintai_ Jawaban Psikologi Attachment Style ",
+                author: "",
+                cover: "https://res.cloudinary.com/dl2egfdw2/image/upload/v1752997185/IMG_9481_yagss3.jpg",
+                desc: "Prinsip dasar dan implementasi jaringan komputer untuk berbagai skala.",
+                category: "Teknologi",
+                rating: 4.6,
+                pages: +50,
+                language: "Indonesia",
+                featured: false,
+                file: "https://drive.google.com/uc?export=download&id=1FA5paJHpZ-IDxzI25VxHuat2VuLYpxSu"
+            },
+            {
+                id: 29,
+                title: "Hukum Tarik-Menarik_ Mitos dan Psikologi ",
+                author: "",
+                cover: "https://res.cloudinary.com/dl2egfdw2/image/upload/v1752997154/IMG_9454_gkcgyq.jpg",
+                desc: "Prinsip dasar dan implementasi jaringan komputer untuk berbagai skala.",
+                category: "Teknologi",
+                rating: 4.6,
+                pages: +50,
+                language: "Indonesia",
+                featured: false,
+                file: "https://drive.google.com/uc?export=download&id=1GiuGzKAvsZ8FPIIQ7a2pAUbqNc0YUgqR"
+            },
+            {
+                id: 30,
+                title: "Etika Digital dan Penggunaan Teknologi yang Bertanggung Jawab ",
+                author: "",
+                cover: "https://res.cloudinary.com/dl2egfdw2/image/upload/v1752997141/IMG_9422_gzyjbk.jpg",
+                desc: "Prinsip dasar dan implementasi jaringan komputer untuk berbagai skala.",
+                category: "Teknologi",
+                rating: 4.6,
+                pages: +50,
+                language: "Indonesia",
+                featured: false,
+                file: "https://drive.google.com/uc?export=download&id=1IGJWS3IMpMvd8mOXk8b4POBvG-oEj9nE"
+            },
+            {
+                id: 31,
+                title: "Budaya Mager_ Gaya Hidup Modern dari Perspektif Sosiologi",
+                author: "",
+                cover: "https://res.cloudinary.com/dl2egfdw2/image/upload/v1752997132/IMG_9439_qyn5eh.jpg",
+                desc: "Prinsip dasar dan implementasi jaringan komputer untuk berbagai skala.",
+                category: "Teknologi",
+                rating: 4.6,
+                pages: +50,
+                language: "Indonesia",
+                featured: false,
+                file: "https://drive.google.com/uc?export=download&id=1KIJDL4dwvPXx4ZJgjJ7VbxmtiLz7NeZ9"
+            },
+            {
+                id: 32,
+                title: "Seni Mengatur Emosi_ Psikologi Positif",
+                author: "",
+                cover: "https://res.cloudinary.com/dl2egfdw2/image/upload/v1752997120/IMG_9430_dxmep6.jpg",
+                desc: "Prinsip dasar dan implementasi jaringan komputer untuk berbagai skala.",
+                category: "Teknologi",
+                rating: 4.6,
+                pages: +50,
+                language: "Indonesia",
+                featured: false,
+                file: "https://drive.google.com/uc?export=download&id=1LhTvq9kvXI5nyrjKFehnBLwRgGJjm_LK"
+            },
+            {
+                id: 33,
+                title: "Small Talk_ Seni Percakapan Ringan dalam Perspektif Psikologi Sosial ",
+                author: "",
+                cover: "https://res.cloudinary.com/dl2egfdw2/image/upload/v1752997149/IMG_9447_hoo8fv.jpg",
+                desc: "Prinsip dasar dan implementasi jaringan komputer untuk berbagai skala.",
+                category: "Teknologi",
+                rating: 4.6,
+                pages: +50,
+                language: "Indonesia",
+                featured: false,
+                file: "https://drive.google.com/uc?export=download&id=1LuE4ntWF0WW4jeB1atXytdMWcNRHf8lc"
+            },
+            {
+                id: 34,
+                title: " Efek Meditasi terhadap Otak_ Apa Kata Penelitian Neurologi",
+                author: "",
+                cover: "https://res.cloudinary.com/dl2egfdw2/image/upload/v1752997120/IMG_9431_gm9vsz.jpg",
+                desc: "Prinsip dasar dan implementasi jaringan komputer untuk berbagai skala.",
+                category: "Teknologi",
+                rating: 4.6,
+                pages: +50,
+                language: "Indonesia",
+                featured: false,
+                file: "https://drive.google.com/uc?export=download&id=1MXCsx6_7_ynBmACjtlwVxKTxTWM4Vug8"
+            },
+            {
+                id: 35,
+                title: " Kenapa Kita Gampang Cemburu_ Ini Penjelasan Neurosains Tentang Emosi",
+                author: "",
+                cover: "https://res.cloudinary.com/dl2egfdw2/image/upload/v1752997165/IMG_9460_scuavb.jpg",
+                desc: "Prinsip dasar dan implementasi jaringan komputer untuk berbagai skala.",
+                category: "Teknologi",
+                rating: 4.6,
+                pages: +50,
+                language: "Indonesia",
+                featured: false,
+                file: "https://drive.google.com/uc?export=download&id=1ND8-YPpOBRrPsfmwM_E2Whk3aNMwjZTx"
+            },
+            {
+                id: 36,
+                title: "Kenapa Aku Gampang Baper_ Jawaban Ilmiah Tentang Sensitivitas Emosi",
+                author: "",
+                cover: "https://res.cloudinary.com/dl2egfdw2/image/upload/v1752997161/IMG_9459_s8uyam.jpg",
+                desc: "Prinsip dasar dan implementasi jaringan komputer untuk berbagai skala.",
+                category: "Teknologi",
+                rating: 4.6,
+                pages: +50,
+                language: "Indonesia",
+                featured: false,
+                file: "https://drive.google.com/uc?export=download&id=1NfZ2Mp_QepTDp6KJuVmfeg1DwKeJy-9K"
+            },
+            {
+                id: 37,
+                title: " Botulinum Neurotoxin untuk Gangguan Kepala dan Leher ",
+                author: "",
+                cover: "https://res.cloudinary.com/dl2egfdw2/image/upload/v1752997129/IMG_9418_m2z4jd.jpg",
+                desc: "Prinsip dasar dan implementasi jaringan komputer untuk berbagai skala.",
+                category: "Teknologi",
+                rating: 4.6,
+                pages: +50,
+                language: "Indonesia",
+                featured: false,
+                file: "https://drive.google.com/uc?export=download&id=1NnYoGhH1Tc6lRtQ0bKV9YlEQZY__SIBF"
+            },
+            {
+                id: 38, 
+                title: "Self Love_ Antara Tren Sosial Media dan Bukti Ilmiah Psikologi ",
+                author: "",
+                cover: "https://res.cloudinary.com/dl2egfdw2/image/upload/v1752997149/IMG_9425_o1a0uw.jpg",
+                desc: "Prinsip dasar dan implementasi jaringan komputer untuk berbagai skala.",
+                category: "Teknologi",
+                rating: 4.6,
+                pages: +50,
+                language: "Indonesia",
+                featured: false,
+                file: "https://drive.google.com/uc?export=download&id=1O-l8c0teRvSH1dolqEg4_qlcb4nZQK3O"
+            },
+            {
+                id: 39,
+                title: "E-Teaching Humaniora_ Grafiati Pendidikan Tinggi ",
+                author: "",
+                cover: "https://res.cloudinary.com/dl2egfdw2/image/upload/v1752997141/IMG_9423_umiqrx.jpg",
+                desc: "Prinsip dasar dan implementasi jaringan komputer untuk berbagai skala.",
+                category: "Teknologi",
+                rating: 4.6,
+                pages: +50,
+                language: "Indonesia",
+                featured: false,
+                file: "https://drive.google.com/uc?export=download&id=1PAFcZn5XBlwo8hGtAakJxa5nXlH4cpxM"
+            },
+            {
+                id: 40,
+                title: " Slow Living_ Gaya Hidup Pelan yang Didukung Ilmu Psikologi Positif ",
+                author: "",
+                cover: "https://res.cloudinary.com/dl2egfdw2/image/upload/v1752997111/IMG_9429_hunzs1.jpg",
+                desc: "Prinsip dasar dan implementasi jaringan komputer untuk berbagai skala.",
+                category: "Teknologi",
+                rating: 4.6,
+                pages: +50,
+                language: "Indonesia",
+                featured: false,
+                file: "https://drive.google.com/uc?export=download&id=1PPpHVs3sogFLzSZdftxFiAMgS6Pn7-F8"
+            },
+            {
+                id: 41,
+                title: "Impostor Syndrome_ Merasa Nggak Pantas Meski Sudah Berhasi ",
+                author: "",
+                cover: "https://res.cloudinary.com/dl2egfdw2/image/upload/v1752997168/IMG_9469_wdbgp6.jpg",
+                desc: "Prinsip dasar dan implementasi jaringan komputer untuk berbagai skala.",
+                category: "Teknologi",
+                rating: 4.6,
+                pages: +50,
+                language: "Indonesia",
+                featured: false,
+                file: "https://drive.google.com/uc?export=download&id=1PbIF6_6DUd1fMkGcGs6Sev7pSJWgnYcV"
+            },
+            {
+                id: 42,
+                title: "Budaya Periklanan dan Terjemahan ",
+                author: "",
+                cover: "https://res.cloudinary.com/dl2egfdw2/image/upload/v1752997111/IMG_9409_hzswmj.jpg",
+                desc: "Prinsip dasar dan implementasi jaringan komputer untuk berbagai skala.",
+                category: "Teknologi",
+                rating: 4.6,
+                pages: +50,
+                language: "Indonesia",
+                featured: false,
+                file: "https://drive.google.com/uc?export=download&id=1Pwx9ct2CWBqqxi_ywobFf0bQdkcstbsz"
+            },
+            {
+                id: 43,
+                title: "Teori Bahwa Kita Semua Cuma Lagi Halu Kolektif",
+                author: "",
+                cover: "https://res.cloudinary.com/dl2egfdw2/image/upload/v1752997203/IMG_9494_kwdoxx.jpg",
+                desc: "Prinsip dasar dan implementasi jaringan komputer untuk berbagai skala.",
+                category: "Teknologi",
+                rating: 4.6,
+                pages: +50,
+                language: "Indonesia",
+                featured: false,
+                file: "https://drive.google.com/uc?export=download&id=1SBMjAqk1zOcGm4GWihug7Pgcqxnteo8V"
+            },
+            {
+                id: 44,
+                title: "Beli Rumah di Usia Muda_ Realita Vs Ekspektasi di Indonesia ",
+                author: "",
+                cover: "https://res.cloudinary.com/dl2egfdw2/image/upload/v1752997182/IMG_9476_cvfhc3.jpg",
+                desc: "Prinsip dasar dan implementasi jaringan komputer untuk berbagai skala.",
+                category: "Teknologi",
+                rating: 4.6,
+                pages: +50,
+                language: "Indonesia",
+                featured: false,
+                file: "https://drive.google.com/uc?export=download&id=1T7EVxmkS3I1pvuXcgJ8Fhap586dN4-1J"
+            },
+            {
+                id: 45,
+                title: "Anak dan Gadget_ Dampak dan Solusi Menurut Jurnal Perkembangan Anak ",
+                author: "",
+                cover: "https://res.cloudinary.com/dl2egfdw2/image/upload/v1752997158/IMG_9450_ch9dhr.jpg",
+                desc: "Prinsip dasar dan implementasi jaringan komputer untuk berbagai skala.",
+                category: "Teknologi",
+                rating: 4.6,
+                pages: +50,
+                language: "Indonesia",
+                featured: false,
+                file: "https://drive.google.com/uc?export=download&id=1WW8194DvkDxxHIUyRqvF3nzG20GHc4_p"
+            },
+            {
+                id: 46,
+                title: "Burnout Bukan Cuma Capek Biasa_ Hasil Studi tentang Kesehatan Mental di Era Modern ",
+                author: "",
+                cover: "https://res.cloudinary.com/dl2egfdw2/image/upload/v1752997127/IMG_9435_o18li6.jpg",
+                desc: "Prinsip dasar dan implementasi jaringan komputer untuk berbagai skala.",
+                category: "Teknologi",
+                rating: 4.6,
+                pages: +50,
+                language: "Indonesia",
+                featured: false,
+                file: "https://drive.google.com/uc?export=download&id=1X0nV_pdAr-Y1gJSsTNeYOKbBpGBiOS28"
+            },
+            {
+                id: 47,
+                title: "Menemukan Tujuan_ Mencari Makna Hidup di Tengah Kekacauan ",
+                author: "",
+                cover: "https://res.cloudinary.com/dl2egfdw2/image/upload/v1752997170/IMG_9471_jarfps.jpg",
+                desc: "Prinsip dasar dan implementasi jaringan komputer untuk berbagai skala.",
+                category: "Teknologi",
+                rating: 4.6,
+                pages: +50,
+                language: "Indonesia",
+                featured: false,
+                file: "https://drive.google.com/uc?export=download&id=1Xa7ThKefu0-zTlzx7YlQeLfRSoWni4j3"
+            },
+            {
+                id: 48,
+                title: "Yang Aneh dan Dongeng dalam The Shining Karya Kubrick ",
+                author: "",
+                cover: "https://res.cloudinary.com/dl2egfdw2/image/upload/v1752997123/IMG_9412_mzu2og.jpg",
+                desc: "Prinsip dasar dan implementasi jaringan komputer untuk berbagai skala.",
+                category: "Teknologi",
+                rating: 4.6,
+                pages: +50,
+                language: "Indonesia",
+                featured: false,
+                file: "https://drive.google.com/uc?export=download&id=1ZI_IW7KhJ3d3Ei3pMECIhmS0ibJvACu5"
+            },
+            {
+                id: 49,
+                title: " Digital Minimalism_ Strategi Hidup Lebih Fokus di Era Smartphone",
+                author: "",
+                cover: "https://res.cloudinary.com/dl2egfdw2/image/upload/v1752997150/IMG_9446_p2hq67.jpg",
+                desc: "Prinsip dasar dan implementasi jaringan komputer untuk berbagai skala.",
+                category: "Teknologi",
+                rating: 4.6,
+                pages: +50,
+                language: "Indonesia",
+                featured: false,
+                file: "https://drive.google.com/uc?export=download&id=1ZioxdLV-GB5oXZh53dLJyTFA0IGB0WjC"
+            },
+            {
+                id: 50,
+                title: "Impulse Buying_ Mengapa Kita Sering Belanja Tanpa Rencana",
+                author: "",
+                cover: "https://res.cloudinary.com/dl2egfdw2/image/upload/v1752997154/IMG_9452_dhxn2u.jpg",
+                desc: "Prinsip dasar dan implementasi jaringan komputer untuk berbagai skala.",
+                category: "Teknologi",
+                rating: 4.6,
+                pages: +50,
+                language: "Indonesia",
+                featured: false,
+                file: "https://drive.google.com/uc?export=download&id=1_xiHdQYcTN_FFpvElHwWmrHCRmalIi6i"
+            },
+            {
+                id: 51,
+                title: "Skimming dan Scanning_ Teknik Membaca Cepat Menurut Penelitian ",
+                author: "",
+                cover: "https://res.cloudinary.com/dl2egfdw2/image/upload/v1752997150/IMG_9445_kyj8o1.jpg",
+                desc: "Prinsip dasar dan implementasi jaringan komputer untuk berbagai skala.",
+                category: "Teknologi",
+                rating: 4.6,
+                pages: +50,
+                language: "Indonesia",
+                featured: false,
+                file: "https://drive.google.com/uc?export=download&id=1bBZHbOaFqD_mj_qWfGIAjrTawLkEWncD"
+            },
+            {
+                id: 52,
+                title: "Social Battery Cepat Habis_ Ini Alasan Ilmiahnya dan Cara Mengelola ",
+                author: "",
+                cover: "https://res.cloudinary.com/dl2egfdw2/image/upload/v1752997166/IMG_9461_b14w7h.jpg",
+                desc: "Prinsip dasar dan implementasi jaringan komputer untuk berbagai skala.",
+                category: "Teknologi",
+                rating: 4.6,
+                pages: +50,
+                language: "Indonesia",
+                featured: false,
+                file: "https://drive.google.com/uc?export=download&id=1c8U87qjWPjgH5lmKGKQQquzZpya7hZzI"
+            },
+            {
+                id: 53,
+                title: "Self-Sabotage Tanpa Sadar_ Bagaimana Kita Menghancurkan Peluang Sendiri ",
+                author: "",
+                cover: "https://res.cloudinary.com/dl2egfdw2/image/upload/v1752997169/IMG_9467_l0golw.jpg",
+                desc: "Prinsip dasar dan implementasi jaringan komputer untuk berbagai skala.",
+                category: "Teknologi",
+                rating: 4.6,
+                pages: +50,
+                language: "Indonesia",
+                featured: false,
+                file: "https://drive.google.com/uc?export=download&id=1cduN14yOqXwV3cMaOZ1CmkTEEdArh3ax"
+            },
+            {
+                id: 54,
+                title: "Bahasa Media Baru ",
+                author: "",
+                cover: "https://res.cloudinary.com/dl2egfdw2/image/upload/v1752997113/IMG_9410_dg8jq8.jpg",
+                desc: "Prinsip dasar dan implementasi jaringan komputer untuk berbagai skala.",
+                category: "Teknologi",
+                rating: 4.6,
+                pages: +50,
+                language: "Indonesia",
+                featured: false,
+                file: "https://drive.google.com/uc?export=download&id=1cpiLISlzbKmamWwTtlJy6PYLVZhT9utt"
+            },
+            {
+                id: 55,
+                title: "Power of Journaling_ Mengapa Menulis Bisa Menyembuhkan ",
+                author: "",
+                cover: "https://res.cloudinary.com/dl2egfdw2/image/upload/v1752997113/IMG_9427_tsk8og.jpg",
+                desc: "Prinsip dasar dan implementasi jaringan komputer untuk berbagai skala.",
+                category: "Teknologi",
+                rating: 4.6,
+                pages: +50,
+                language: "Indonesia",
+                featured: false,
+                file: "https://drive.google.com/uc?export=download&id=1cx7LXtbC4Z4-0Lp8IZahU9JvGC5kNkh-"
+            },
+            {
+                id: 56,
+                title: "Attachment Style_ Bagaimana Pola Ikatan Masa Kecil Mempengaruhi Hubungan Dewasa",
+                author: "",
+                cover: "https://res.cloudinary.com/dl2egfdw2/image/upload/v1752997156/IMG_9451_gyndxz.jpg",
+                desc: "Prinsip dasar dan implementasi jaringan komputer untuk berbagai skala.",
+                category: "Teknologi",
+                rating: 4.6,
+                pages: +50,
+                language: "Indonesia",
+                featured: false,
+                file: "https://drive.google.com/uc?export=download&id=1dDbB-aQnsElPjVrN2zSJSXI-O_4nV9NT"
+            },
+            {
+                id: 57,
+                title: "Kalau Internet Mati 7 Hari, Dunia Bakal Jadi Apa ",
+                author: "",
+                cover: "https://res.cloudinary.com/dl2egfdw2/image/upload/v1752997194/IMG_9491_drkncq.jpg",
+                desc: "Prinsip dasar dan implementasi jaringan komputer untuk berbagai skala.",
+                category: "Teknologi",
+                rating: 4.6,
+                pages: +50,
+                language: "Indonesia",
+                featured: false,
+                file: "https://drive.google.com/uc?export=download&id=1em1GvzIJvDeZnHHk4cHIlpF_IyPzqDZW"
+            },
+            {
+                id: 58,
+                title: "Kenapa Mikir di Kamar Mandi Rasanya Lebih Jernih_ Mengungkap Rahasia Otak di Balik Ide-Ide Cemerlang ",
+                author: "",
+                cover: "https://res.cloudinary.com/dl2egfdw2/image/upload/v1752997187/IMG_9487_g9qmy7.jpg",
+                desc: "Prinsip dasar dan implementasi jaringan komputer untuk berbagai skala.",
+                category: "Teknologi",
+                rating: 4.6,
+                pages:+50 ,
+                language: "Indonesia",
+                featured: false,
+                file: "https://drive.google.com/uc?export=download&id=1ep7b7fX3tm1Qm5ms67GLp1AJb8nQomvx"
+            },
+            {
+                id: 59,
+                title: "Bagaimana Dunia Berubah Berkat Media Sosial  ",
+                author: "",
+                cover: "https://res.cloudinary.com/dl2egfdw2/image/upload/v1752997108/IMG_9405_pp4itn.jpg",
+                desc: "Prinsip dasar dan implementasi jaringan komputer untuk berbagai skala.",
+                category: "Teknologi",
+                rating: 4.6,
+                pages:+50 ,
+                language: "Indonesia",
+                featured: false,
+                file: "https://drive.google.com/uc?export=download&id=1ev1S3GEjIEOtSxJJZ92r0Cqq0616j8t0"
+            },
+            {
+                id: 60,
+                title: "Sains di Balik Public Speaking_ Bagaimana Otak Mengelola Rasa Gugup ",
+                author: "",
+                cover: "https://res.cloudinary.com/dl2egfdw2/image/upload/v1752997148/IMG_9443_inc2ch.jpg",
+                desc: "Prinsip dasar dan implementasi jaringan komputer untuk berbagai skala.",
+                category: "Teknologi",
+                rating: 4.6,
+                pages: +50,
+                language: "Indonesia",
+                featured: false,
+                file: "https://drive.google.com/uc?export=download&id=1feuzmBy7zoOPcUP9Bp38vfA9dB6-ELtk"
+            },
+            {
+                id: 61,
+                title: "Topological Photonics & Cahaya Canggih_ Membuka Era Baru Manipulasi Cahaya",
+                author: "",
+                cover: "https://res.cloudinary.com/dl2egfdw2/image/upload/v1752997136/IMG_9421_vb3z93.jpg",
+                desc: "Prinsip dasar dan implementasi jaringan komputer untuk berbagai skala.",
+                category: "Teknologi",
+                rating: 4.6,
+                pages:    +50,
+                language: "Indonesia",
+                featured: false,
+                file: "https://drive.google.com/uc?export=download&id=1g2ML4-WuLQKWg112sKvTv9316J7U6GJj"
+            },
+            {
+                id: 62,
+                title: " Belajar Efektif_ Strategi dari Hasil Penelitian Pendidikan Modern ",
+                author: "",
+                cover: "https://res.cloudinary.com/dl2egfdw2/image/upload/v1752997144/IMG_9442_otlhqy.jpg",
+                desc: "Prinsip dasar dan implementasi jaringan komputer untuk berbagai skala.",
+                category: "Teknologi",
+                rating: 4.6,
+                pages:  +50,
+                language: "Indonesia",
+                featured: false,
+                file: "https://drive.google.com/uc?export=download&id=1gC9kFVHtdBFvXmXSpkgfMzWzJwkgAYwD"
+            },
+            {
+                id: 63,
+                title: "Multitasking vs Single-tasking_ Mana yang Lebih Efektif Menurut Ilmu Kognitif_ ", 
+                author: "",
+                cover: "https://res.cloudinary.com/dl2egfdw2/image/upload/v1752997175/IMG_9474_jbk0yn.jpg",
+                desc: "Prinsip dasar dan implementasi jaringan komputer untuk berbagai skala.",
+                category: "Teknologi",
+                rating: 4.6,
+                pages:  +50,
+                language: "Indonesia",
+                featured: false,
+                file: "https://drive.google.com/uc?export=download&id=1gis7arJ6Ya6EhWmMTIqeGJdIuiH1u9pp"
+            },
+            {
+                id: 64,
+                title: "Makan Emosional saat Kuliah_ Kenapa Kamu Cenderung Makan untuk Meredakan Stres_ ",
+                author: "",
+                cover: "https://res.cloudinary.com/dl2egfdw2/image/upload/v1752997179/IMG_9477_prs95y.jpg",
+                desc: "Prinsip dasar dan implementasi jaringan komputer untuk berbagai skala.",
+                category: "Teknologi",
+                rating: 4.6,
+                pages: +50,
+                language: "Indonesia",
+                featured: false,
+                file: "https://drive.google.com/uc?export=download&id=1gsfc6r_zcT-UmqipWc8mqq8be1g73v_g"
+            },
+            {
+                id: 65,
+                title: "The Science of Letting Go_ Ilmu Melepaskan Tanpa Drama Berlebihan ",
+                author: "",
+                cover: "https://res.cloudinary.com/dl2egfdw2/image/upload/v1752997173/IMG_9468_nh3wak.jpg",
+                desc: "Prinsip dasar dan implementasi jaringan komputer untuk berbagai skala.",
+                category: "Teknologi",
+                rating: 4.6,
+                pages: +50,
+                language: "Indonesia",
+                featured: false,
+                file: "https://drive.google.com/uc?export=download&id=1jnEQ3BJ3Huyody3AVcuGbZ2ID0rQMTf7"
+            },
+            {
+                id: 66,
+                title: "Smart City_ Dampak dan Peluang untuk Kehidupan Kota ",
+                author: "",
+                cover: "https://res.cloudinary.com/dl2egfdw2/image/upload/v1752997191/IMG_9482_ter9bz.jpg",
+                desc: "Prinsip dasar dan implementasi jaringan komputer untuk berbagai skala.",
+                category: "Teknologi",
+                rating: 4.6,
+                pages: +50,
+                language: "Indonesia",
+                featured: false,
+                file: "https://drive.google.com/uc?export=download&id=1kBJww413dukw9xlzwmVINmXHlpiUlkuX"
+            },
+            {
+                id: 67,
+                title: "Efek Cahaya dan Warna Ruangan terhadap Mood & Produktivitas_ Panduan Ilmiah untuk Ruangan yang Menginspirasi ",
+                author: "",
+                cover: "https://res.cloudinary.com/dl2egfdw2/image/upload/v1752997183/IMG_9484_hqzn41.jpg",
+                desc: "Prinsip dasar dan implementasi jaringan komputer untuk berbagai skala.",
+                category: "Teknologi",
+                rating: 4.6,
+                pages: +50,
+                language: "Indonesia",
+                featured: false,
+                file: "https://drive.google.com/uc?export=download&id=1kGVDiyEmuQEcSIYrkszYrRCV1S5fNZ0W"
+            },
+            {
+                id: 68,
+                title: "Gut-Brain Connection_ Hubungan Usus dan Mood Menurut Riset Terbaru ",
+                author: "",
+                cover: "https://res.cloudinary.com/dl2egfdw2/image/upload/v1752997160/IMG_9453_w6ev9m.jpg",
+                desc: "Prinsip dasar dan implementasi jaringan komputer untuk berbagai skala.",
+                category: "Teknologi",
+                rating: 4.6,
+                pages: +50,
+                language: "Indonesia",
+                featured: false,
+                file: "https://drive.google.com/uc?export=download&id=1lA4TAoucHGbU-s6566CnVN1dR530_8w1"
+            },
+            {
+                id: 69,
+                title: "Panduan Menghadapi Hari Senin ",
+                author: "",
+                cover: "https://res.cloudinary.com/dl2egfdw2/image/upload/v1753027104/IMG_9488_oezqjx.jpg",
+                desc: "Prinsip dasar dan implementasi jaringan komputer untuk berbagai skala.",
+                category: "Teknologi",
+                rating: 4.6,
+                pages: +50,
+                language: "Indonesia",
+                featured: false,
+                file: "https://drive.google.com/uc?export=download&id=1lfOevC6Lqez3kknuZZk2j1LAKNSdNO5z"
+            },
+            {
+                id: 70,
+                title: "Menavigasi Kehidupan Digital di Pedesaan Inggris ",
+                author: "",
+                cover: "https://res.cloudinary.com/dl2egfdw2/image/upload/v1752997116/IMG_9408_ttezw4.jpg",
+                desc: "Prinsip dasar dan implementasi jaringan komputer untuk berbagai skala.",
+                category: "Teknologi",
+                rating: 4.6,
+                pages: +50,
+                language: "Indonesia",
+                featured: false,
+                file: "https://drive.google.com/uc?export=download&id=1lmLRxcAxZFqoAcxUfRfM0J_JmL3lmS5W"
+            },
+            {
+                id: 71,
+                title: "Multitasking di Era Digital_ Efisiensi atau Sumber Stres_ ",
+                author: "",
+                cover: "https://res.cloudinary.com/dl2egfdw2/image/upload/v1752997132/IMG_9437_jvaxg2.jpg",
+                desc: "Prinsip dasar dan implementasi jaringan komputer untuk berbagai skala.",
+                category: "Teknologi",
+                rating: 4.6,
+                pages: +50,
+                language: "Indonesia",
+                featured: false,
+                file: "https://drive.google.com/uc?export=download&id=1n-YghGQ4u5qQ0sxKotwdhwGfceqgufLK"
+            },
+            {
+                id: 72,
+                title: "Suara Perempuan di Ruang Daring ",
+                author: "",
+                cover: "https://res.cloudinary.com/dl2egfdw2/image/upload/v1752997122/IMG_9413_ubalgz.jpg",
+                desc: "Prinsip dasar dan implementasi jaringan komputer untuk berbagai skala.",
+                category: "Teknologi",
+                rating: 4.6,
+                pages: +50,
+                language: "Indonesia",
+                featured: false,
+                file: "https://drive.google.com/uc?export=download&id=1nLOhFF6vJdyqCsKXZ9MXBw9kBcJA-Vdi"
+            },
+            {
+                id: 73,
+                title: "Media Sosial di Tiongkok Industri_ Menavigasi Transformasi Digital dan Keterlibatan ",
+                author: "",
+                cover: "https://res.cloudinary.com/dl2egfdw2/image/upload/v1752997105/IMG_9406_gelefc.jpg",
+                desc: "Prinsip dasar dan implementasi jaringan komputer untuk berbagai skala.",
+                category: "Teknologi",
+                rating: 4.6,
+                pages: +50,
+                language: "Indonesia",
+                featured: false,
+                file: "https://drive.google.com/uc?export=download&id=1o-5PgApQjLIxCtTAV5Gkv_s-TFBkov9y"
+            },
+            {
+                id: 74,
+                title: "Fenomena Prokrastinasi Akademik_ Mengapa Kita Sering Menunda Tugas_ ",
+                author: "",
+                cover: "https://res.cloudinary.com/dl2egfdw2/image/upload/v1752997126/IMG_9434_a8ueww.jpg",
+                desc: "Prinsip dasar dan implementasi jaringan komputer untuk berbagai skala.",
+                category: "Teknologi",
+                rating: 4.6,
+                pages: +50,
+                language: "Indonesia",
+                featured: false,
+                file: "https://drive.google.com/uc?export=download&id=1o-LO1XdUTjdyl07FGdb8IzEwqJO3i4E5"
+            },
+            {
+                id:75,
+                title: "Neuroplastisitas_ Bukti Ilmiah bahwa Otak Bisa Berubah ",
+                author: "",
+                cover: "https://res.cloudinary.com/dl2egfdw2/image/upload/v1752997142/IMG_9424_fmf0m4.jpg",
+                desc: "Prinsip dasar dan implementasi jaringan komputer untuk berbagai skala.",
+                category: "Teknologi",
+                rating: 4.6,
+                pages: +50,
+                language: "Indonesia",
+                featured: false,
+                file: "https://drive.google.com/uc?export=download&id=1pnYtTvAFD-4N2Z2f9MByT9YgQHhXkiLH"
+            },
+            {
+                id:     76,
+                title: "Komunitas Digital dan Jurnalisme Warga ",
+                author: "",
+                cover: "https://res.cloudinary.com/dl2egfdw2/image/upload/v1752997126/IMG_9414_zz68tw.jpg",
+                desc: "Prinsip dasar dan implementasi jaringan komputer untuk berbagai skala.",
+                category: "Teknologi",
+                rating: 4.6,
+                pages: +50,
+                language: "Indonesia",
+                featured: false,
+                file: "https://drive.google.com/uc?export=download&id=1pp45Dt6bh5miq5Rg_aXGLmqFlirr5qUH"
+            },
+            {
+                id: 77,
+                title: "Detoks Digital_ Mitos atau Solusi_ Perspektif Ilmiah dari Jurnal Teknologi Kesehatan ",
+                author: "",
+                cover: "https://res.cloudinary.com/dl2egfdw2/image/upload/v1752997134/IMG_9438_lsfyo4.jpg",
+                desc: "Prinsip dasar dan implementasi jaringan komputer untuk berbagai skala.",
+                category: "Teknologi",
+                rating: 4.6,
+                pages: +50,
+                language: "Indonesia",
+                featured: false,
+                file: "https://drive.google.com/uc?export=download&id=1sIUwEPz66Rri0bdeFq6cfFGLCTP8JeIT"
+            },
+            {
+                id:  78,
+                title: "Jangan Takut Jomblo_ Psikologi Positif ",
+                author: "",
+                cover: "https://res.cloudinary.com/dl2egfdw2/image/upload/v1752997183/IMG_9483_rldz93.jpg",
+                desc: "Prinsip dasar dan implementasi jaringan komputer untuk berbagai skala.",
+                category: "Teknologi",
+                rating: 4.6,
+                pages: +50,
+                language: "Indonesia",
+                featured: false,
+                file: "https://drive.google.com/uc?export=download&id=1sMi_l6SSVRUrlNzwvinH2B_3REey3irz"
+            },
+            {
+                id: 79,
+                title: "Mengelola Stres Harian_ Teknik Terbukti dari Hasil Riset Klinis ",
+                author: "",
+                cover: "https://res.cloudinary.com/dl2egfdw2/image/upload/v1752997108/IMG_9428_pkpnd8.jpg",
+                desc: "Prinsip dasar dan implementasi jaringan komputer untuk berbagai skala.",
+                category: "Teknologi",
+                rating: 4.6,
+                pages: +50,
+                language: "Indonesia",
+                featured: false,
+                file: "https://drive.google.com/uc?export=download&id=1sbiqOMDeG3PSy_aVGKHvJVzdUosqT6Ji"
+            },
+            {
+                id: 80,
+                title: "Keluarga Toksik_ Panduan dan Pemulihan ",
+                author: "",
+                cover: "https://res.cloudinary.com/dl2egfdw2/image/upload/v1752997197/IMG_9485_ya8zso.jpg",
+                desc: "Prinsip dasar dan implementasi jaringan komputer untuk berbagai skala.",
+                category: "Teknologi",
+                rating: 4.6,
+                pages: +50,
+                language: "Indonesia",
+                featured: false,
+                file: "https://drive.google.com/uc?export=download&id=1talVZSI4YYd23ecBb3Of1MTc1OHSI24M"
+            },
+            {
+                id: 81,
+                title: "Efek Musik Terhadap Fokus dan Konsentrasi_ Kajian Psikologi Belajar ",
+                author: "",
+                cover: "https://res.cloudinary.com/dl2egfdw2/image/upload/v1752997126/IMG_9432_iwgdmi.jpg",
+                desc: "Prinsip dasar dan implementasi jaringan komputer untuk berbagai skala.",
+                category: "Teknologi",
+                rating: 4.6,
+                pages: +50,
+                language: "Indonesia",
+                featured: false,
+                file: "https://drive.google.com/uc?export=download&id=1vO9QpJ5GhFb5B6BLkZqRwq-hhMMfxuy5"
+            },
+            {
+                id: 82,
+                title: "Beton, Asap, dan Stres_ Psikologi di Balik Hidup di Kota Tanpa Ruang Hijau ",
+                author: "",
+                cover: "https://res.cloudinary.com/dl2egfdw2/image/upload/v1752997189/IMG_9490_rw0go9.jpg",
+                desc: "Prinsip dasar dan implementasi jaringan komputer untuk berbagai skala.",
+                category: "Teknologi",
+                rating: 4.6,
+                pages: +50,
+                language: "Indonesia",
+                featured: false,
+                file: "https://drive.google.com/uc?export=download&id=1vkEkHmim29VVyFcWlmxvBEpp7QykHf34"
+            },
+            {
+                id: 83,
+                title: "Self Healing Realistis BiasaGak Semua Self Healing itu Pergi ke Pantai_ Versi Realistis untuk Orang Biasa ",
+                author: "",
+                cover: "https://res.cloudinary.com/dl2egfdw2/image/upload/v1752997177/IMG_9478_wurdrb.jpg",
+                desc: "Prinsip dasar dan implementasi jaringan komputer untuk berbagai skala.",
+                category: "Teknologi",
+                rating: 4.6,
+                pages: +50,
+                language: "Indonesia",
+                featured: false,
+                file: "https://drive.google.com/uc?export=download&id=1w6aVpnujc-NZXVe0OSPxRWRAGWztpUZD"
+            },
+            {
+                id:     84,
+                title: "Kecerdasan Emosional_ Soft Skill Penting yang Gak Pernah Diajarin di Sekolah ",
+                author: "",
+                cover: "https://res.cloudinary.com/dl2egfdw2/image/upload/v1752997164/IMG_9465_msyphr.jpg",
+                desc: "Prinsip dasar dan implementasi jaringan komputer untuk berbagai skala.",
+                category: "Teknologi",
+                rating: 4.6,
+                pages: +50,
+                language: "Indonesia",
+                featured: false,
+                file: "https://drive.google.com/uc?export=download&id=1wg3IFlfHv4TooFlcS0Lfgs2lHus7gSfb"
+            },
+            {
+                id:    85,
+                title: "Integrasi E-Book dalam Sains ",
+                author: "",
+                cover: "https://res.cloudinary.com/dl2egfdw2/image/upload/v1752997130/IMG_9416_cvituq.jpg",
+                desc: "Prinsip dasar dan implementasi jaringan komputer untuk berbagai skala.",
+                category: "Teknologi",
+                rating: 4.6,
+                pages: +50,
+                language: "Indonesia",
+                featured: false,
+                file: "https://drive.google.com/uc?export=download&id=1xqPLU3tB83gXCgKGB7gn1BEp0-37TCPt"
+            },
+            {
+                id: 86,
+                title: "Bagaimana Start-Up Berhasil di Tempat yang Tak Terduga ",
+                author: "",
+                cover: "https://res.cloudinary.com/dl2egfdw2/image/upload/v1752997118/IMG_9411_la07y3.jpg",
+                desc: "Prinsip dasar dan implementasi jaringan komputer untuk berbagai skala.",
+                category: "Teknologi",
+                rating: 4.6,
+                pages: +50,
+                language: "Indonesia",
+                featured: false,
+                file: "https://drive.google.com/uc?export=download&id=1xuAJh6DlElHnhJt9GZ6dxm5hafNDq4pB"
+            },
+            {
+                id: 87,
+                title: "Mitos Modern_ Penjelasan dan Studi Kasus ",
+                author: "",
+                cover: "https://res.cloudinary.com/dl2egfdw2/image/upload/v1752997204/IMG_9492_iyopkw.jpg",
+                desc: "Prinsip dasar dan implementasi jaringan komputer untuk berbagai skala.",
+                category: "Teknologi",
+                rating: 4.6,
+                pages: +50,
+                language: "Indonesia",
+                featured: false,
+                file: "https://drive.google.com/uc?export=download&id=1y_z6pFAqqbEKwGB_6t5dlyQxQtUG1lN7"
+            },
+            {
+                id: 88,
+                title: "Sindir Tanpa Disadari_ Budaya Passive Aggressive di Indonesia ",
+                author: "",
+                cover: "https://res.cloudinary.com/dl2egfdw2/image/upload/v1752997180/IMG_9480_ilhsqq.jpg",
+                desc: "Prinsip dasar dan implementasi jaringan komputer untuk berbagai skala.",
+                category: "Teknologi",
+                rating: 4.6,
+                pages: +50,
+                language: "Indonesia",
+                featured: false,
+                file: "https://drive.google.com/uc?export=download&id=1zLUhMoc9pOEN7KWMzy9TWsjUfAp8z2rk"
+            },
+            {
+                id: 89,
+                title: "Mengatur Ekspektasi dalam Hidup_ Biar Gak Kecewa Tiap Saat ",
+                author: "",
+                cover: "https://res.cloudinary.com/dl2egfdw2/image/upload/v1752997163/IMG_9464_bfpcqs.jpg",
+                desc: "Prinsip dasar dan implementasi jaringan komputer untuk berbagai skala.",
+                category: "Teknologi",
+                rating: 4.6,
+                pages: +50,
+                language: "Indonesia",
+                featured: false,
+                file: "https://drive.google.com/uc?export=download&id=1zzEY79DqyiBhGOfXwEpS3zZnibRDkGCT"
+            },
+            {
+                id: 90,
+                title: "Mitos Modern_ ",
+                author: "",
+                cover: "https://res.cloudinary.com/dl2egfdw2/image/upload/v1752997204/IMG_9492_iyopkw.jpg",
+                desc: "Prinsip dasar dan implementasi jaringan komputer untuk berbagai skala.",
+                category: "Teknologi",
+                rating: 4.6,
+                pages: +50,
+                language: "Indonesia",
+                featured: false,
+                file: "https://drive.google.com/uc?export=download&id=1y_z6pFAqqbEKwGB_6t5dlyQxQtUG1lN7"
+            },
+            {
+                id: 91,
+                title: "Sains dari Hal yang Kita Anggap Sepele ",
+                author: "",
+                cover: "https://res.cloudinary.com/dl2egfdw2/image/upload/v1753004703/Screenshot_2025-07-20_163110_alqmpl.png",
+                desc: "Prinsip dasar dan implementasi jaringan komputer untuk berbagai skala.",
+                category: "Teknologi",
+                rating: 4.6,
+                pages: +50,
+                language: "Indonesia",
+                featured: false,
+                file: "https://drive.google.com/uc?export=download&id=15MIcdqbtvL2ojNcJe3JWjCbbhPRO0qTi"
+            },
+            {
+                id: 92,
+                title: "Neurohacks_ Trik Kognitif yang Terbukti Secara Ilmiah Tapi Jarang Diajarkan ",
+                author: "",
+                cover: "https://res.cloudinary.com/dl2egfdw2/image/upload/v1753004705/Screenshot_2025-07-20_163212_vhnavy.png",
+                desc: "Prinsip dasar dan implementasi jaringan komputer untuk berbagai skala.",
+                category: "Teknologi",
+                rating: 4.6,
+                pages: +50,
+                language: "Indonesia",
+                featured: false,
+                file: "https://drive.google.com/uc?export=download&id=1FIyyRsvDKgOxEK-cLUB-HlZUv5XQF8wN"
+            },
+            {
+                id: 93,
+                title: "Introvert, Ekstrovert, atau Trauma yang Belum Selesai _ebook",
+                author: "",
+                cover: "https://res.cloudinary.com/dl2egfdw2/image/upload/v1753004879/Screenshot_2025-06-13_140450_u6aovn.png",
+                desc: "Prinsip dasar dan implementasi jaringan komputer untuk berbagai skala.",
+                category: "Teknologi",
+                rating: 4.6,
+                pages: +50,
+                language: "Indonesia",
+                featured: false,
+                file: "https://drive.google.com/uc?export=download&id=1HOTxVNLEV2NniqNbSIm1baWSqfxY6XqG"
+            },
+            {
+                id: 94,
+                title: "Bagaimana Persepsi Waktu Dipengaruhi oleh Budaya, Usia, dan Trauma",
+                author: "",
+                cover: "https://res.cloudinary.com/dl2egfdw2/image/upload/v1753004704/Screenshot_2025-07-20_163510_i9lj4s.png",
+                desc: "Prinsip dasar dan implementasi jaringan komputer untuk berbagai skala.",
+                category: "Teknologi",
+                rating: 4.6,
+                pages: +50,
+                language: "Indonesia",
+                featured: false,
+                file: "https://drive.google.com/uc?export=download&id=1dQW8ZW6IDgeaUbHGe2PFmkCuBWbobr3g"
+            },
+            {
+                id: 95,
+                title: "Seni Kebahagian Berkelanjutan",
+                author: "",
+                cover: "https://res.cloudinary.com/dl2egfdw2/image/upload/v1753004704/Screenshot_2025-07-20_163556_rphue4.png",
+                desc: "Prinsip dasar dan implementasi jaringan komputer untuk berbagai skala.",
+                category: "Teknologi",
+                rating: 4.6,
+                pages: +50,
+                language: "Indonesia",
+                featured: false,
+                file: "https://drive.google.com/uc?export=download&id=1lr0oB3lWJa3qlc7_v59kdu1TVVzZNCWs"
+            },
+            {
+                id: 96,
+                title: "Bagaimana Teknologi Mengubah Pancaindra Kita",
+                author: "",
+                cover: "https://res.cloudinary.com/dl2egfdw2/image/upload/v1753004712/Screenshot_2025-07-20_163651_dix6ld.png",
+                desc: "Prinsip dasar dan implementasi jaringan komputer untuk berbagai skala.",
+                category: "Teknologi",
+                rating: 4.6,
+                pages: +50,
+                language: "Indonesia",
+                featured: false,
+                file: "https://drive.google.com/uc?export=download&id=1ttArOgIbXLD3ZJQ97tSMyBvMc4QhukHB"
+            },
+            {
+                id: 97,
+                title: " Bisakah Kita Mewarisi Trauma?",
+                author: "",
+                cover: "https://res.cloudinary.com/dl2egfdw2/image/upload/v1753004707/Screenshot_2025-07-20_163737_wdiday.png",
+                desc: "Prinsip dasar dan implementasi jaringan komputer untuk berbagai skala.",
+                category: "Teknologi",
+                rating: 4.6,
+                pages: +50,
+                language: "Indonesia",
+                featured: false,
+                file: "https://drive.google.com/uc?export=download&id=1wEZOd69K4YFurldoWigG9izBOY6kV5ON"
+            },
+            {
+                id: 98,
+                title: "Mengapa Kita Masih Punya ‘Goosebumps’ Saat Takut? ",
+                author: "",
+                cover: "https://res.cloudinary.com/dl2egfdw2/image/upload/v1753006464/Screenshot_2025-07-20_163850_swf8ga.png",
+                desc: "Prinsip dasar dan implementasi jaringan komputer untuk berbagai skala.",
+                category: "Teknologi",
+                rating: 4.6,
+                pages: +50,
+                language: "Indonesia",
+                featured: false,
+                file: "https://drive.google.com/uc?export=download&id=1xz0Th1pr0ZrPog4cugshGfumlgc8kY2T"
+            },
+            {
+                id: 99,
+                title: "Apa yang Membuat Otak Suka Seseorang dalam 0,7 Detik",
+                author: "",
+                cover: "https://res.cloudinary.com/dl2egfdw2/image/upload/v1753006464/Screenshot_2025-07-20_164017_g1jndl.png",
+                desc: "Prinsip dasar dan implementasi jaringan komputer untuk berbagai skala.",
+                category: "Teknologi",
+                rating: 4.6,
+                pages: +50,
+                language: "Indonesia",
+                featured: false,
+                file: "https://drive.google.com/uc?export=download&id=1yYUxsaHb8qLf9UNkjorDe9OG6tgjZ2M7"
+            },
+            {
+                id: 100,
+                title: "Mengapa Pikiran Gelisah Bisa Merusak Seluruh Tubuh ?",
+                author: "",
+                cover: "https://res.cloudinary.com/dl2egfdw2/image/upload/v1753006462/Screenshot_2025-07-20_164059_lzr1sz.png",
+                desc: "Prinsip dasar dan implementasi jaringan komputer untuk berbagai skala.",
+                category: "Teknologi",
+                rating: 4.6,
+                pages: +50,
+                language: "Indonesia",
+                featured: false,
+                file: "https://drive.google.com/uc?export=download&id=1zuPbotufNN1i6zII48VYIfznNu_txhxJ"
+            }
+        ];
+// Otomatis isi category berdasarkan title
+eliteBooks.forEach(book => {
+    const title = book.title.toLowerCase();
+    if (title.includes('ai') || title.includes('kecerdasan buatan') || title.includes('machine learning') || title.includes('deep learning')) {
+        book.category = 'AI';
+    } else if (title.includes('data') || title.includes('big data') || title.includes('data science')) {
+        book.category = 'Data';
+    } else if (title.includes('desain') || title.includes('ui/ux')) {
+        book.category = 'Desain';
+    } else if (title.includes('keamanan') || title.includes('siber') || title.includes('security')) {
+        book.category = 'Keamanan';
+    } else if (title.includes('blockchain')) {
+        book.category = 'Blockchain';
+    } else if (title.includes('algoritma') || title.includes('struktur data') || title.includes('pemrograman') || title.includes('komputer') || title.includes('jaringan') || title.includes('sistem operasi') || title.includes('teknologi') || title.includes('internet')) {
+        book.category = 'Teknologi';
+    } else {
+        book.category = 'Umum';
+    }
+});
+// Otomatis isi desc berdasarkan title
+eliteBooks.forEach(book => {
+    book.desc = `Buku berjudul '${book.title}' ini membahas topik sesuai judulnya dan sangat bermanfaat untuk pembaca yang ingin memperdalam pengetahuan di bidang tersebut.`;
+});
+
+        // Global Variables
+        let currentFilter = 'all';
+        let searchTerm = '';
+        let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+
+        // DOM Elements
+        const featuredBtn = document.getElementById('featuredBtn');
+        const booksSection = document.getElementById('booksSection');
+        const bookGrid = document.getElementById('bookGrid');
+        const filterInput = document.getElementById('filterInput');
+        const categoryPills = document.getElementById('categoryPills');
+        const bookModal = new bootstrap.Modal(document.getElementById('bookModal'));
+        const successNotification = document.getElementById('successNotification');
+        const notificationMessage = document.getElementById('notificationMessage');
+
+        // Initialize Application
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeApp();
+            createFloatingParticles();
+            setupEventListeners();
+        });
+
+        // Initialize App
+        function initializeApp() {
+            renderBooks(eliteBooks);
+            updateBookCount();
+            setupIntersectionObserver();
+        }
+
+        // Create Floating Particles
+        function createFloatingParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 50;
+
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.width = Math.random() * 4 + 2 + 'px';
+                particle.style.height = particle.style.width;
+                particle.style.animationDelay = Math.random() * 20 + 's';
+                particle.style.animationDuration = (Math.random() * 10 + 15) + 's';
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        // Setup Event Listeners
+        function setupEventListeners() {
+            // Navigation buttons
+            featuredBtn.addEventListener('click', () => {
+                showBooksSection();
+                currentFilter = 'favorites';
+                updateActiveCategory();
+                renderBooks(getFilteredBooks());
+            });
+
+            // Filter functionality
+            filterInput.addEventListener('input', debounce(handleFilter, 300));
+
+            // Category pills
+            categoryPills.addEventListener('click', (e) => {
+                if (e.target.classList.contains('category-pill')) {
+                    currentFilter = e.target.dataset.category;
+                    updateActiveCategory();
+                    renderBooks(getFilteredBooks());
+                }
+            });
+
+            // Modal buttons
+            document.getElementById('downloadBtn').addEventListener('click', handleDownload);
+            document.getElementById('favoriteBtn').addEventListener('click', handleFavorite);
+        }
+
+        // Show Books Section
+        function showBooksSection() {
+            booksSection.style.display = 'block';
+            setTimeout(() => {
+                booksSection.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }, 100);
+        }
+
+        // Handle Filter
+        function handleFilter() {
+            searchTerm = filterInput.value.toLowerCase().trim();
+            renderBooks(getFilteredBooks());
+        }
+
+        // Get Filtered Books
+        function getFilteredBooks() {
+            let filteredBooks = eliteBooks;
+
+            // Filter by category
+            if (currentFilter === 'favorites') {
+                filteredBooks = filteredBooks.filter(book => favorites.includes(book.id));
+            } else if (currentFilter !== 'all') {
+                filteredBooks = filteredBooks.filter(book => book.category === currentFilter);
+            }
+
+            // Filter by search term
+            if (searchTerm) {
+                filteredBooks = filteredBooks.filter(book => 
+                    book.title.toLowerCase().includes(searchTerm) || 
+                    book.author.toLowerCase().includes(searchTerm) ||
+                    book.category.toLowerCase().includes(searchTerm) ||
+                    book.desc.toLowerCase().includes(searchTerm)
+                );
+            }
+
+            return filteredBooks;
+        }
+
+        // Update Active Category
+        function updateActiveCategory() {
+            document.querySelectorAll('.category-pill').forEach(pill => {
+                pill.classList.remove('active');
+                if (currentFilter === 'favorites' && pill.dataset.category === 'all') {
+                    pill.classList.add('active');
+                } else if (pill.dataset.category === currentFilter) {
+                    pill.classList.add('active');
+                }
+            });
+        }
+
+        // Render Books
+        function renderBooks(booksToRender) {
+            bookGrid.innerHTML = '';
+            if (!Array.isArray(booksToRender) || booksToRender.length === 0) {
+                bookGrid.innerHTML = `
+                    <div class="col-,, text-center py-5">
+                        <i class="fas fa-search fa-4x mb-4 opacity-30"></i>
+                        <h3 class="fw-bold mb-3">Tidak ada buku yang ditemukan</h3>
+                        <p class="text-muted mb-4">Coba gunakan kata kunci yang berbeda atau jelajahi kategori lain</p>
+                        <button class="btn btn-elite rounded-pill px-4 py-2" onclick="clearFilters()">
+                            <i class="fas fa-refresh me-2"></i>Reset Filter
+                        </button>
+                    </div>
+                `;
+                return;
+            }
+            booksToRender.forEach((book, index) => {
+                const bookItem = document.createElement('div');
+                bookItem.className = 'elite-grid-item';
+                bookItem.style.opacity = '0';
+                bookItem.style.transform = 'translateY(30px)';
+                const isFavorite = favorites.includes(book.id);
+                const featuredBadge = book.featured ? '<span class="badge bg-warning position-absolute top-0 end-0 m-2"><i class="fas fa-star"></i></span>' : '';
+                const coverSrc = book.cover || book.coverUrl || '/logo512.png';
+                bookItem.innerHTML = `
+                    <div class="elite-card h-100 position-relative">
+                        ${featuredBadge}
+                        <div class="book-display">
+                            <img src="${coverSrc}" 
+                                 class="img-fluid w-100" 
+                                 alt="${book.title || ''}"
+                                 style="height: 320px; object-fit: cover;"
+                                 loading="lazy"
+                                 onerror="this.onerror=null;this.src='/logo512.png';">
+                        </div>
+                        <div class="p-4 position-relative" style="z-index: 2;">
+                            <h5 class="mb-2 fw-bold">${book.title || ''}</h5>
+                            <p class="text-muted small mb-2">oleh ${book.author || ''}</p>
+                            <p class="small mb-3 book-description" style="font-size: 0.85rem; line-height: 1.4;">${book.desc ? book.desc.substring(0, 80) : ''}...</p>
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <div class="rating-display">
+                                    ${'<i class="fas fa-star star"></i>'.repeat(Math.floor(book.rating || 0))}
+                                    ${(book.rating && book.rating % 1 >= 0.5) ? '<i class="fas fa-star-half-alt star"></i>' : ''}
+                                    <span class="text-white ms-1 small">${book.rating || ''}</span>
+                                </div>
+                            </div>
+                            <div class="d-flex gap-2">
+                                <button class="btn btn-elite btn-sm rounded-pill flex-grow-1" onclick="openBookModal(${book.id})">
+                                    <i class="fas fa-eye me-1"></i> Lihat Detail
+                                </button>
+                                <button class="btn ${isFavorite ? 'btn-warning' : 'btn-outline-warning'} btn-sm rounded-pill px-3" onclick="toggleFavorite(${book.id})">
+                                    <i class="fas fa-heart"></i>
+                                </button>
+                                ${book.file ? `<button class="btn btn-outline-success btn-sm rounded-pill px-3" onclick="downloadBook(${book.id})">
+                                    <i class="fas fa-download"></i>
+                                </button>` : ''}
+                            </div>
+                        </div>
+                    </div>
+                `;
+                bookItem.addEventListener('click', (e) => {
+                    if (!e.target.closest('button') && !e.target.closest('a')) {
+                        openBookModal(book.id);
+                    }
+                });
+                bookGrid.appendChild(bookItem);
+                setTimeout(() => {
+                    bookItem.style.transition = `all 0.6s cubic-bezier(0.16, 1, 0.3, 1) ${index * 0.1}s`;
+                    bookItem.style.opacity = '1';
+                    bookItem.style.transform = 'translateY(0)';
+                }, 100);
+            });
+        }
+
+        // Open Book Modal
+        function openBookModal(bookId) {
+            const book = eliteBooks.find(b => b.id === bookId);
+            if (!book) return;
+            document.getElementById('modalBookTitle').textContent = book.title || '';
+            document.getElementById('modalBookAuthor').textContent = book.author ? `oleh ${book.author}` : '';
+            document.getElementById('modalBookDesc').textContent = book.desc || '';
+            const coverSrc = book.cover || book.coverUrl || '/logo512.png';
+            document.getElementById('modalBookCover').src = coverSrc;
+            document.getElementById('modalBookCover').onerror = function() { this.src = '/logo512.png'; };
+            const ratingElement = document.getElementById('modalBookRating');
+            ratingElement.innerHTML = 
+                `${'<i class="fas fa-star star"></i>'.repeat(Math.floor(book.rating || 0))}
+                 ${(book.rating && book.rating % 1 >= 0.5) ? '<i class="fas fa-star-half-alt star"></i>' : ''}
+                 <span class="ms-2 fw-bold">${book.rating || ''}/5.0</span>`;
+            document.getElementById('modalBookCategory').textContent = book.category || '';
+            document.getElementById('modalBookLanguage').textContent = book.language || '';
+            const favoriteBtn = document.getElementById('favoriteBtn');
+            const isFavorite = favorites.includes(book.id);
+            favoriteBtn.innerHTML = `<i class="fas fa-heart me-2"></i> ${isFavorite ? 'Hapus dari Favorit' : 'Tambah ke Favorit'}`;
+            favoriteBtn.className = `btn ${isFavorite ? 'btn-warning' : 'btn-outline-warning'} rounded-pill px-4 py-3`;
+            window.currentBookId = book.id;
+            window.currentBookFileUrl = book.file || '';
+            bookModal.show();
+        }
+
+        // Handle Download
+        function handleDownload() {
+            const book = eliteBooks.find(b => b.id === window.currentBookId);
+            if (!book || !book.file) {
+                showNotification('File buku tidak tersedia untuk diunduh.');
+                return;
+            }
+            
+            const downloadBtn = document.getElementById('downloadBtn');
+            const downloadSpinner = document.getElementById('downloadSpinner');
+            const downloadProgress = document.getElementById('downloadProgress');
+            const downloadProgressBar = document.getElementById('downloadProgressBar');
+            
+            downloadBtn.disabled = true;
+            downloadSpinner.style.display = 'inline-block';
+            downloadProgress.style.display = 'block';
+            
+            let progress = 0;
+            const interval = setInterval(() => {
+                progress += Math.random() * 15;
+                if (progress > 100) progress = 100;
+                downloadProgressBar.style.width = progress + '%';
+                
+                if (progress >= 100) {
+                    clearInterval(interval);
+                    setTimeout(() => {
+                        downloadBtn.disabled = false;
+                        downloadSpinner.style.display = 'none';
+                        downloadProgress.style.display = 'none';
+                        downloadProgressBar.style.width = '0%';
+                        showNotification(`✅ ${book.title} berhasil diunduh!`);
+                        
+                        // Membuat link download otomatis
+                        const link = document.createElement('a');
+                        link.href = book.file;
+                        link.download = book.title; // Nama file saat didownload
+                        link.target = '_blank';
+                        document.body.appendChild(link);
+                        link.click();
+                        document.body.removeChild(link);
+                    }, 500);
+                }
+            }, 100);
+        }
+
+        // Download Book from Card
+        function downloadBook(bookId) {
+            const book = eliteBooks.find(b => b.id === bookId);
+            if (!book || !book.file) {
+                showNotification('File buku tidak tersedia untuk diunduh.');
+                return;
+            }
+            
+            showNotification(`⏳ Memulai download ${book.title}...`);
+            
+            // Membuat link download otomatis
+            const link = document.createElement('a');
+            link.href = book.file;
+            link.download = book.title; // Nama file saat didownload
+            link.target = '_blank';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+
+
+
+        // Handle Favorite
+        function handleFavorite() {
+            toggleFavorite(window.currentBookId);
+            
+            // Update modal button
+            const favoriteBtn = document.getElementById('favoriteBtn');
+            const isFavorite = favorites.includes(window.currentBookId);
+            favoriteBtn.innerHTML = `<i class="fas fa-heart me-2"></i> ${isFavorite ? 'Hapus dari Favorit' : 'Tambah ke Favorit'}`;
+            favoriteBtn.className = `btn ${isFavorite ? 'btn-warning' : 'btn-outline-warning'} rounded-pill px-4 py-3`;
+        }
+
+        // Toggle Favorite
+        function toggleFavorite(bookId) {
+            const book = eliteBooks.find(b => b.id === bookId);
+            const index = favorites.indexOf(bookId);
+            
+            if (index > -1) {
+                favorites.splice(index, 1);
+                showNotification(`💔 ${book.title} dihapus dari favorit`);
+            } else {
+                favorites.push(bookId);
+                showNotification(`❤️ ${book.title} ditambahkan ke favorit`);
+            }
+            
+            localStorage.setItem('favorites', JSON.stringify(favorites));
+            
+            // Re-render if current view shows favorites or all books
+            if (currentFilter === 'all' || currentFilter === 'favorites') {
+                renderBooks(getFilteredBooks());
+            }
+        }
+
+        // Clear Filters
+        function clearFilters() {
+            currentFilter = 'all';
+            searchTerm = '';
+            filterInput.value = '';
+            updateActiveCategory();
+            renderBooks(getFilteredBooks());
+            showNotification('🔄 Filter berhasil direset');
+        }
+
+        // Show Notification
+        function showNotification(message) {
+            notificationMessage.textContent = message;
+            successNotification.classList.add('show');
+            
+            setTimeout(() => {
+                successNotification.classList.remove('show');
+            }, 3000);
+        }
+
+        // Update Book Count
+        function updateBookCount() {
+            document.getElementById('bookCount').textContent = eliteBooks.length + '+';
+        }
+
+        // Intersection Observer for Performance
+        function setupIntersectionObserver() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const img = entry.target;
+                        if (img.dataset.src) {
+                            img.src = img.dataset.src;
+                            img.removeAttribute('data-src');
+                            observer.unobserve(img);
+                        }
+                    }
+                });
+            }, { 
+                rootMargin: '200px',
+                threshold: 0.1
+            });
+
+            // Observe future images
+            const observeImages = () => {
+                document.querySelectorAll('img[data-src]').forEach(img => {
+                    observer.observe(img);
+                });
+            };
+            
+            // Initial observation
+            observeImages();
+            
+            // Re-observe after renders
+            const originalRenderBooks = renderBooks;
+            renderBooks = function(...args) {
+                originalRenderBooks.apply(this, args);
+                setTimeout(observeImages, 100);
+            };
+        }
+
+        // Debounce Function for Performance
+        function debounce(func, wait) {
+            let timeout;
+            return function executedFunction(...args) {
+                const later = () => {
+                    clearTimeout(timeout);
+                    func(...args);
+                };
+                clearTimeout(timeout);
+                timeout = setTimeout(later, wait);
+            };
+        }
+
+        // Keyboard Shortcuts
+        document.addEventListener('keydown', (e) => {
+            if (e.ctrlKey || e.metaKey) {
+                switch(e.key) {
+                    case 'f':
+                        e.preventDefault();
+                        filterInput.focus();
+                        break;
+                }
+            }
+            
+            if (e.key === 'Escape') {
+                if (bookModal._isShown) {
+                    bookModal.hide();
+                }
+            }
+        });
+
+        // Service Worker for Offline Support
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then((registration) => {
+                        console.log('SW registered: ', registration);
+                    })
+                    .catch((registrationError) => {
+                        console.log('SW registration failed: ', registrationError);
+                    });
+            });
+        }
+    </script>
+</body>
+</html>
